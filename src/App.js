@@ -1,53 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 //import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button, Typography, IconButton, ThemeProvider } from '@material-ui/core';
-import { createMuiTheme } from '@material-ui/core/styles'
-import { green, amber } from '@material-ui/core/colors';
+import { createMuiTheme } from '@material-ui/core/styles';
+import {
+  ThemeProvider,
+} from '@material-ui/core/esm';
+
+import BottomNavBar from './Components/BottomNavBar/BottomNavBar'
+import TopNavBar from './Components/TopNavBar/TopNavBar';
+
+
 
 const theme = createMuiTheme({
 
   palette: {
     primary: {
-      main: '#1b5e20',
+      main: '#689f38',
     },
     secondary: {
-      main: '#00897b',
+      main: '#9ccc65',
     },
   },
 
 })
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+
 
 function App() {
-  const classes = useStyles(theme);
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  function handleLoggedIn() {
+    setLoggedIn(!loggedIn)
+  }
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static" className={classes.appbar}>
-        <Toolbar>
+      <TopNavBar handleLoggedIn={handleLoggedIn} loggedIn={loggedIn}/>
 
-          <Typography variant="h6" className={classes.title}>
-            News
-    </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
+      <BottomNavBar loggedIn={loggedIn}/>
 
 
-      <Button variant="contained" color="secondary">
-        Clique sur moi !
-    </Button>
     </ThemeProvider>
   );
 }
