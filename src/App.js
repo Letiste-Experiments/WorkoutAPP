@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-//import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { createMuiTheme } from '@material-ui/core/styles';
 import {
   ThemeProvider,
@@ -7,7 +7,11 @@ import {
 
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar'
 import TopNavBar from './Components/TopNavBar/TopNavBar';
-
+import Homepage from './Components/Homepage/Homepage'
+import Foods from './Components/Foods/Foods'
+import Signup from './Components/Signup/Signup'
+import Exercises from './Components/Exercises/Exercises'
+import Login from './Components/Login/Login'
 
 
 const theme = createMuiTheme({
@@ -32,13 +36,25 @@ function App() {
     setLoggedIn(!loggedIn)
   }
   return (
-    <ThemeProvider theme={theme}>
-      <TopNavBar handleLoggedIn={handleLoggedIn} loggedIn={loggedIn}/>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <TopNavBar handleLoggedIn={handleLoggedIn} loggedIn={loggedIn} />
 
-      <BottomNavBar loggedIn={loggedIn}/>
+        <BottomNavBar loggedIn={loggedIn} />
 
 
-    </ThemeProvider>
+
+
+
+        <Switch>
+          <Route exact path={"/"} render={(props) => <Homepage {...props} loggedIn={loggedIn} />}  />
+          <Route exact path={"/signup"} component={Signup} />
+          <Route exact path={"/foods"} component={Foods} />
+          <Route exact path={"/exercises"} component={Exercises} />
+          <Route exact path={"/login"} component ={Login} />
+        </Switch>
+      </ThemeProvider>
+    </Router>
   );
 }
 
