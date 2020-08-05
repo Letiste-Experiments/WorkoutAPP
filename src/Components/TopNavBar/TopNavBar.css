@@ -1,0 +1,11 @@
+.topnavbartitle {
+  flex-grow: 1;
+
+}
+
+.homelink {
+  text-decoration: none;
+  color: inherit;
+}
+
+
