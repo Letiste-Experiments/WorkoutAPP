@@ -20,19 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b4c7405-a126-45de-b564-906e74672d69" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/Foods/Food.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Foods/FoodList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Foods/Foods.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Foods/MyFoods.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Foods/MyMeals.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Profile/Profile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/FoodService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/SessionService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/http-wger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Foods/CreateMeal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Foods/FoodList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Foods/FoodList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Foods/Foods.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Foods/Foods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Foods/FoodsMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Foods/FoodsMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Foods/MyMeals.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Foods/MyMeals.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/FoodService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FoodService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +47,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test-db_food" />
+    <property name="last_opened_file_path" value="$USER_HOME$/test-db_food" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -90,6 +87,8 @@
       <workItem from="1596372721151" duration="13056000" />
       <workItem from="1596439144122" duration="7948000" />
       <workItem from="1596459067056" duration="11843000" />
+      <workItem from="1596633975907" duration="18003000" />
+      <workItem from="1596718873238" duration="13806000" />
     </task>
     <servers />
   </component>
@@ -133,9 +132,9 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="449" y="174" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1596473500085" />
-    <state x="623" y="237" width="672" height="678" key="search.everywhere.popup" timestamp="1596374489193">
+    <state x="623" y="237" width="672" height="678" key="search.everywhere.popup" timestamp="1596645623916">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="623" y="237" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1596374489193" />
+    <state x="623" y="237" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1596645623916" />
   </component>
 </project>

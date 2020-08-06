@@ -15,14 +15,19 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Dialog,
-  DialogTitle
+
 
 } from "@material-ui/core/esm";
 import {Add as AddIcon, ExpandMore as ExpandMoreIcon, Delete as DeleteIcon} from "@material-ui/icons"
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import Foods from "./Foods";
+import TextField from "@material-ui/core/TextField";
+import {useDebounce} from "use-debounce";
+import {ButtonPage} from "./FoodsMenu";
+import {Divider} from "@material-ui/core";
+import CreateMeal from "./CreateMeal";
 
 function MealList({meal, foods, setDeletedMeal, deletedMeal}) {
   const [expanded, setExpanded] = useState(false);
@@ -73,12 +78,12 @@ function MealList({meal, foods, setDeletedMeal, deletedMeal}) {
   )
 }
 
+
 export default function MyFoods({userid, pageNumber, search, setLastPage}) {
 
   const [meals, setMeals] = useState([])
   const [foods, setFoods] = useState([])
   const [deletedMeal, setDeletedMeal] = useState(false)
-  const [open, setOpen] = useState(false)
 
 
   useEffect(() => {
@@ -110,14 +115,6 @@ export default function MyFoods({userid, pageNumber, search, setLastPage}) {
     retrieveMyMeals(pageNumber, search)
   }, [search, pageNumber, userid, setLastPage, deletedMeal])
 
-  function handleClickOpen() {
-    setOpen(true)
-  }
-
-  function handleClose() {
-    setOpen(false)
-  }
-
 
   return (
     <>
@@ -129,23 +126,7 @@ export default function MyFoods({userid, pageNumber, search, setLastPage}) {
           ))}
         </List>
       </Grid>)}
-      < Fab style={{position: 'absolute', bottom: 80, right: 20}} color="primary" aria-label="add"
-            onClick={handleClickOpen}>
-        <AddIcon/>
-      </Fab>
-      <Dialog onClose={handleClose} open={open}>
-        <DialogTitle onClose={handleClose}>
-          Create a Meal
-        </DialogTitle>
-        <DialogContent dividers>
-          loutre
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color={"primary"}>
-            Create
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <CreateMeal userid={userid}/>
     </>
   )
 }
