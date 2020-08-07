@@ -20,16 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b4c7405-a126-45de-b564-906e74672d69" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/Foods/CreateMeal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Foods/FoodList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Foods/FoodList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Foods/Foods.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Foods/Foods.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Foods/FoodsMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Foods/FoodsMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Foods/CreateMeal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Foods/CreateMeal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Foods/MyMeals.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Foods/MyMeals.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/FoodService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/FoodService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +82,8 @@
       <workItem from="1596439144122" duration="7948000" />
       <workItem from="1596459067056" duration="11843000" />
       <workItem from="1596633975907" duration="18003000" />
-      <workItem from="1596718873238" duration="13806000" />
+      <workItem from="1596718873238" duration="14364000" />
+      <workItem from="1596794550303" duration="10509000" />
     </task>
     <servers />
   </component>

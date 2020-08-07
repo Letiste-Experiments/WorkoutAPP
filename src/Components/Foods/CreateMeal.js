@@ -4,7 +4,6 @@ import {Add as AddIcon, ExpandMore as ExpandMoreIcon, KeyboardArrowLeft, Keyboar
 import {
   DialogContent,
   TextField,
-  DialogActions,
   Button,
   Accordion,
   AccordionSummary,
@@ -15,26 +14,21 @@ import {
   DialogTitle,
   Grid,
   List,
-  TableContainer,
-  Paper,
-  Table,
-  TableBody,
-  TableRow,
-  TableCell
+  FormControl,
+  InputLabel,
+  MenuItem,
+  MobileStepper,
+  ListItem,
+  Typography,
+  Select
 } from "@material-ui/core/esm";
+import {Delete as DeleteIcon} from "@material-ui/icons"
+import Alert from "@material-ui/lab/Alert";
 import {ButtonPage} from "./FoodsMenu";
 import Food from "./Food";
 import DataMealService from "../../services/MealService"
 import DataFoodService from "../../services/FoodService";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import MobileStepper from "@material-ui/core/MobileStepper";
 import {makeStyles} from "@material-ui/core/styles";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import {Delete as DeleteIcon} from "@material-ui/icons"
 
 
 function FoodMealList({food, addFood}) {
@@ -101,8 +95,9 @@ function StepNameMeal({name, setName}) {
 
   return (
     <>
-      Name of the meal:
+      <Typography variant={"h6"}>Name of the meal:</Typography>
       <TextField
+        style={{marginTop: 10}}
         label={"Name"}
         type={"text"}
         value={name}
@@ -223,14 +218,15 @@ const useStyles = makeStyles({
 
 const titles = ["Create a Meal", "Add the foods", "Set the quantities"]
 
-export default function CreateMeal({userid}) {
+export default function CreateMeal({handleMealCreated}) {
   const [open, setOpen] = useState(false)
-
-  const [name, setName] = useState("")
+  const [name, setName] = useState("Meal")
   const [foods, setFoods] = useState([])
   const [activeStep, setActiveStep] = useState(0)
+  const [errors, setErrors] = useState([])
 
   const classes = useStyles()
+
 
   function handleQuantity(qty, index) {
     const nextFoods = foods.slice("")
@@ -250,6 +246,10 @@ export default function CreateMeal({userid}) {
 
   function handleClose() {
     setOpen(false)
+    setName("Meal")
+    setActiveStep(0)
+    setFoods([])
+    setErrors("")
   }
 
   const handleNext = () => {
@@ -262,25 +262,74 @@ export default function CreateMeal({userid}) {
 
   function addFood(food) {
     const nextFoods = foods.slice("")
-    console.log(foods)
-    if (foods.includes(food)) {
-      // show danger flash
-    } else {
+    let valid = true
+    nextFoods.forEach(({id}) => {
+      if (food.id === id) {
+        valid = false
+      }
+    })
+    if (valid) {
       nextFoods.push({...food, quantity: "", unit: "g"})
+    } else {
+      // maybe show msg
     }
     setFoods(nextFoods)
   }
 
+  function validateMeal() {
+    const nextErrors = []
+
+    if (!(name.replace(/\s/g, '').length)) {
+      nextErrors.push("Name can't be empty")
+    }
+    if (foods.length === 0) {
+      nextErrors.push("At least one food should be added")
+    }
+    foods.forEach((food, index) => {
+      if (!(food.quantity.replace(/\s/g, '').length) || isNaN(food.quantity) || food.quantity <= 0) {
+        nextErrors.push(`Food ${index + 1} has an incorrect quantity`)
+      }
+    })
+    if (nextErrors.length === 0) {
+      createMeal()
+    } else {
+      setErrors(nextErrors)
+    }
+  }
+
+  function createMeal() {
+    const dataFoods = []
+    let food
+    foods.forEach(({id, quantity, unit}) => {
+      food = {id: id, quantity: quantity, unit: unit}
+      dataFoods.push(food)
+    })
+    const data = {name: name, foods: dataFoods}
+    DataMealService.create(data)
+      .then(() => {
+        handleClose()
+        handleMealCreated()
+
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
     <>
-      < Fab style={{position: 'absolute', bottom: 80, right: 20}} color="primary" aria-label="add"
+      < Fab style={{position: 'fixed', bottom: 80, right: 20}} color="primary" aria-label="add"
             onClick={handleClickOpen}>
         <AddIcon/>
       </Fab>
-      <Dialog maxWidth={"md"} fullWidth onClose={handleClose} open={open}
-              classes={{paper: classes.dialogPaper}}>
+      <Dialog maxWidth={"md"} fullWidth onClose={handleClose} open={open} classes={{paper: classes.dialogPaper}}>
         <DialogTitle onClose={handleClose}>
           {titles[activeStep]}
+          {errors.length > 0 && (
+            <>
+              {errors.map((error, index) => (
+                <Alert key={index} variant={"filled"} severity={"error"}>{error}</Alert>
+              ))}
+            </>
+          )}
         </DialogTitle>
 
         <DialogContent>
@@ -300,7 +349,7 @@ export default function CreateMeal({userid}) {
                 Next
                 <KeyboardArrowRight/>
               </Button>) : (
-              <Button size={"small"} color={"primary"} variant={"contained"}>
+              <Button size={"small"} color={"primary"} variant={"contained"} onClick={validateMeal}>
                 Create
               </Button>
             )
@@ -313,8 +362,8 @@ export default function CreateMeal({userid}) {
             }
           />
 
-
         </DialogContent>
+
       </Dialog>
     </>
   )
