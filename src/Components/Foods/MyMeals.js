@@ -4,7 +4,6 @@ import DataMealService from '../../services/MealService'
 import {
   Grid,
   List,
-  Fab,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -15,27 +14,25 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Dialog,
-  DialogTitle
+
 
 } from "@material-ui/core/esm";
 import {Add as AddIcon, ExpandMore as ExpandMoreIcon, Delete as DeleteIcon} from "@material-ui/icons"
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
+import CreateMeal from "./CreateMeal";
 
-function MealList({meal, foods, setDeletedMeal, deletedMeal}) {
+function MealList({meal, foods, index, removeMeal}) {
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+    setExpanded(isExpanded ? panel : false)
   }
 
   return (
     <Accordion style={{width: '35ch'}} TransitionProps={{unmountOnExit: true}} expanded={expanded === meal.id}
                onChange={handleChange(meal.id)}>
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon/>}
+        expandIcon={
+          <ExpandMoreIcon/>}
         aria-controls="panel1bh-content"
         id="panel1bh-header"
       >
@@ -43,8 +40,19 @@ function MealList({meal, foods, setDeletedMeal, deletedMeal}) {
           edge="start"
           onClick={(event) => {
             event.stopPropagation()
+
+          }}
+          onFocus={(event) => event.stopPropagation()}
+        >
+          <AddIcon/>
+        </IconButton>
+
+        <IconButton
+          edge="start"
+          onClick={(event) => {
+            event.stopPropagation()
             DataMealService.remove(meal.id)
-              .then(() => setDeletedMeal(!deletedMeal))
+              .then(() => removeMeal(index))
               .catch(err => console.log(err.message))
           }}
           onFocus={(event) => event.stopPropagation()}
@@ -73,22 +81,25 @@ function MealList({meal, foods, setDeletedMeal, deletedMeal}) {
   )
 }
 
-export default function MyFoods({userid, pageNumber, search, setLastPage}) {
+
+export default function MyMeals({userid, pageNumber, search, setLastPage}) {
 
   const [meals, setMeals] = useState([])
   const [foods, setFoods] = useState([])
   const [deletedMeal, setDeletedMeal] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [mealCreated, setMealCreated] = useState(false)
 
+  function handleMealCreated() {
+    setMealCreated(!mealCreated)
+  }
 
   useEffect(() => {
     function retrieveMyMeals(page, search) {
+      setMeals([])
+      setFoods([])
       DataUserService.getMeals(userid, page, search)
         .then(res => {
           const nextMeals = res.data.meals
-          setMeals(nextMeals)
-          console.log("MEALS", nextMeals)
-          setLastPage(res.data.lastPage)
           const nextFoods = []
           let nextFood
           // Promise to let finish adding all the foods before setting it
@@ -96,11 +107,12 @@ export default function MyFoods({userid, pageNumber, search, setLastPage}) {
             nextMeals.forEach(async (meal, index) => {
               nextFood = await DataMealService.getFoods(meal.id)
               nextFoods.push(nextFood.data)
-              if (index === nextMeals.length - 1) resolve()
+              if (nextFoods.length === nextMeals.length) resolve()
             })
           })
           prom.then(() => {
-            console.log("NEXT", nextFoods)
+            setMeals(nextMeals)
+            setLastPage(res.data.lastPage)
             setFoods(nextFoods)
           })
         })
@@ -108,16 +120,13 @@ export default function MyFoods({userid, pageNumber, search, setLastPage}) {
     }
 
     retrieveMyMeals(pageNumber, search)
-  }, [search, pageNumber, userid, setLastPage, deletedMeal])
+  }, [search, pageNumber, userid, setLastPage, deletedMeal, mealCreated])
 
-  function handleClickOpen() {
-    setOpen(true)
+  function removeMeal(index) {
+    const nextMeals = meals.slice("")
+    nextMeals.splice(index, 1)
+    setMeals(nextMeals)
   }
-
-  function handleClose() {
-    setOpen(false)
-  }
-
 
   return (
     <>
@@ -125,27 +134,11 @@ export default function MyFoods({userid, pageNumber, search, setLastPage}) {
         <List>
           {meals.map((meal, index) => (
             <MealList key={meal.id} foods={foods[index]} meal={meal} deletedMeal={deletedMeal}
-                      setDeletedMeal={setDeletedMeal}/>
+                      setDeletedMeal={setDeletedMeal} index={index} removeMeal={removeMeal}/>
           ))}
         </List>
       </Grid>)}
-      < Fab style={{position: 'absolute', bottom: 80, right: 20}} color="primary" aria-label="add"
-            onClick={handleClickOpen}>
-        <AddIcon/>
-      </Fab>
-      <Dialog onClose={handleClose} open={open}>
-        <DialogTitle onClose={handleClose}>
-          Create a Meal
-        </DialogTitle>
-        <DialogContent dividers>
-          loutre
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color={"primary"}>
-            Create
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <CreateMeal handleMealCreated={handleMealCreated}/>
     </>
   )
 }

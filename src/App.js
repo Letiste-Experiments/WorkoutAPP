@@ -9,7 +9,7 @@ import {
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar'
 import TopNavBar from './Components/TopNavBar/TopNavBar'
 import Homepage from './Components/Homepage/Homepage'
-import FoodsMenu from './Components/Foods/FoodsMenu'
+import {FoodsMenu} from './Components/Foods/FoodsMenu'
 import Signup from './Components/Signup/Signup'
 import Exercises from './Components/Exercises/Exercises'
 import Login from './Components/Login/Login'

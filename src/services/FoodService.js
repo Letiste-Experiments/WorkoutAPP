@@ -4,8 +4,8 @@ import base from "./http-wger"
 const API_KEY = "TFSFQU0eLmqvdoiBHjJeTMaEt1XV5KHOyh9fS9gd"
 
 
-function getAll(pageNumber, search) {
-  return http.get(`/foods?search=${search}&pageNumber=${pageNumber}&pageSize=20`)
+function getAll(pageNumber, search, pageSize = 20) {
+  return http.get(`/foods?search=${search}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
 }
 
 function create(data) {

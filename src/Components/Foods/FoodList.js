@@ -14,7 +14,7 @@ export default function FoodList({food, loggedIn}) {
     setExpanded(isExpanded ? panel : false);
   };
   return (
-    <Accordion style={{width: '35ch'}} TransitionProps={{unmountOnExit: true}} expanded={expanded === food.id}
+    <Accordion TransitionProps={{unmountOnExit: true}} expanded={expanded === food.id}
                onChange={handleChange(food.id)}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon/>}

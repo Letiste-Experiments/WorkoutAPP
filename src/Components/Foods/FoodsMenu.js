@@ -72,7 +72,7 @@ function FoodsTabs({setSearch, setPageNumber}) {
 }
 
 
-export default function FoodsMenu({loggedIn}) {
+function FoodsMenu({loggedIn}) {
   const [search, setSearch] = useState("")
   const [searchDebounce] = useDebounce(search, 150)
   const [pageNumber, setPageNumber] = useState(0)
@@ -137,4 +137,9 @@ export default function FoodsMenu({loggedIn}) {
 
     </Grid>
   )
+}
+
+export {
+  ButtonPage,
+  FoodsMenu,
 }

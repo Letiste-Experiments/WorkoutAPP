@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import DataFoodService from "../../services/FoodService";
 
-export default function MyFoods({userid, pageNumber, search, setLastPage}) {
+export default function Foods({userid, pageNumber, search, setLastPage}) {
 
 
   const [foods, setFoods] = useState([])
